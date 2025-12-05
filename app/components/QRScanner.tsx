@@ -6,9 +6,10 @@ import { Html5Qrcode } from 'html5-qrcode';
 interface QRScannerProps {
     onScanSuccess: (decodedText: string) => void;
     onScanError?: (error: string) => void;
+    isPaused?: boolean;
 }
 
-export default function QRScanner({ onScanSuccess, onScanError }: QRScannerProps) {
+export default function QRScanner({ onScanSuccess, onScanError, isPaused = false }: QRScannerProps) {
     const [isScanning, setIsScanning] = useState(false);
     const [cameras, setCameras] = useState<{ id: string; label: string }[]>([]);
     const [selectedCamera, setSelectedCamera] = useState<string>('');
@@ -118,6 +119,19 @@ export default function QRScanner({ onScanSuccess, onScanError }: QRScannerProps
         setSelectedCamera(cameraId);
     };
 
+    // Handle pause/resume based on isPaused prop
+    useEffect(() => {
+        if (!scannerRef.current || !isScanning) return;
+
+        if (isPaused) {
+            // Pause scanning
+            scannerRef.current.pause(true);
+        } else {
+            // Resume scanning
+            scannerRef.current.resume();
+        }
+    }, [isPaused, isScanning]);
+
     useEffect(() => {
         return () => {
             if (scannerRef.current && isScanning) {
@@ -180,6 +194,14 @@ export default function QRScanner({ onScanSuccess, onScanError }: QRScannerProps
                         <div className="placeholder-content">
                             <span className="placeholder-icon">📱</span>
                             <p>Clique em "Iniciar Scanner" para começar</p>
+                        </div>
+                    </div>
+                )}
+                {isScanning && isPaused && (
+                    <div className="scanner-paused-overlay">
+                        <div className="paused-content">
+                            <span className="paused-icon">⏸️</span>
+                            <p>Scanner Pausado</p>
                         </div>
                     </div>
                 )}

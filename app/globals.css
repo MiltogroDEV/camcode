@@ -403,6 +403,156 @@ body::before {
   }
 }
 
+/* Scanner Paused Overlay */
+.scanner-paused-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(8px);
+  z-index: 10;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.paused-content {
+  text-align: center;
+  color: white;
+}
+
+.paused-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 0.5rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.paused-content p {
+  font-size: 1.125rem;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+/* Validation Prompt */
+.validation-prompt {
+  margin-top: 1.5rem;
+  padding: 1.5rem;
+  border-radius: var(--radius-lg);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
+  border: 2px solid rgba(99, 102, 241, 0.3);
+  animation: fadeInScale 0.4s ease-out;
+}
+
+.validation-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.validation-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.validation-icon {
+  font-size: 2rem;
+  flex-shrink: 0;
+}
+
+.validation-header h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.validation-qr-value {
+  padding: 1rem;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  font-family: 'Courier New', monospace;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  word-break: break-all;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Validation Action Buttons */
+.validation-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.btn-validate,
+.btn-deny {
+  padding: 1rem 1.5rem;
+  border-radius: var(--radius-lg);
+  border: none;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition-base);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.btn-validate {
+  background: linear-gradient(135deg, #10b981, #059669);
+  color: white;
+  box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+}
+
+.btn-validate:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+}
+
+.btn-validate:active {
+  transform: translateY(-1px);
+}
+
+.btn-deny {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+  color: white;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
+}
+
+.btn-deny:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
+}
+
+.btn-deny:active {
+  transform: translateY(-1px);
+}
+
+.btn-icon {
+  font-size: 1.25rem;
+}
+
+
 /* Scan History */
 .scan-history {
   display: flex;
